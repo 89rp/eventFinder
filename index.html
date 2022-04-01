@@ -1,12 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
+    <header>
+        <h1>Event Finder</h1>
+        <p>An app designed to show you what events are available at an arena near you!</p>
+    </header>
+
+    <main>
+        <section class="dropDownMenus">
+            <form action="" method="" class="finderForm" name="finderForm">
+                <div class="venueDropDown">
+                    <label for="venue">Venue: </label>
+                    <select name="venueName" id="venue" required>
+                        <option value="" disabled selected>--Please choose an option--</option>
+                    </select>
+                </div>
+                <div class="categoryDropDown">
+                    <label for="category">Category: </label>
+                    <select name="categoryName" id="category" required>
+                        <option value="" disabled selected>--Please choose an option--</option>
+                    </select>
+                </div>
+                <div class="dateDropDown">
+                    <label for="date">Date: </label>
+                    <select name="date" id="date" required>
+                        <option value="" disabled selected>--Please choose an option--</option>
+                    </select>
+                </div>
+                <button type="submit">Show Me Events!</button>
+            </form>
+        </section>
+
+    </main>
+
 </body>
+
 </html>
