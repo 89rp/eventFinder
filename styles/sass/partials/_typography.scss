@@ -12,16 +12,18 @@ body {
 }
 
 h1{
-    font-family: $headerFont, cursive;
+    font-family: $accentFont, cursive;
     font-weight:400;
-    font-size:5rem;
-    letter-spacing: 0.4rem;
-    line-height: 5rem;
+    font-size:12rem;
+    letter-spacing: 0.6rem;
+    line-height: 12rem;
     color:$headerMain;
 }
 
 header {
     p{
         color:$headerAccent;
+        font-size: 3rem;
+        line-height: 4rem;
     }
 }

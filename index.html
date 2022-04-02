@@ -25,28 +25,32 @@
 
     <main>
         <section class="dropDownMenus">
-            <form action="" method="" class="finderForm" name="finderForm">
-                <div class="venueDropDown">
-                    <label for="venue">Venue: </label>
-                    <select name="venueName" id="venue" required>
-                        <option value="" disabled selected>--Please choose an option--</option>
-                    </select>
-                </div>
-                <div class="categoryDropDown">
-                    <label for="category">Category: </label>
-                    <select name="categoryName" id="category" required>
-                        <option value="" disabled selected>--Please choose an option--</option>
-                    </select>
-                </div>
-                <div class="dateDropDown">
-                    <label for="date">Date: </label>
-                    <select name="date" id="date" required>
-                        <option value="" disabled selected>--Please choose an option--</option>
-                    </select>
-                </div>
-                <button type="submit" class="button">Show Me Events!</button>
-            </form>
-        </section>
+            <div class="wrapper">
+                <form action="" method="" class="finderForm" name="finderForm">
+                    <div>
+                        <div class="venueDropDown">
+                            <label for="venue">Venue: </label>
+                            <select name="venueName" id="venue" required>
+                                <option value="" disabled selected>Select venue</option>
+                            </select>
+                        </div>
+                        <div class="categoryDropDown">
+                            <label for="category">Category: </label>
+                            <select name="categoryName" id="category" required>
+                                <option value="" disabled selected>Select category</option>
+                            </select>
+                        </div>
+                        <div class="dateDropDown">
+                            <label for="date">Date: </label>
+                            <select name="date" id="date" required>
+                                <option value="" disabled selected>Select date</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="button">Show Me Events!</button>
+                </form>
+            </div><!--.wrapper end-->
+        </section><!--.dropDownMenus end-->
 
         <section class="searchResults">
             <div class="resultsContainer">
@@ -55,7 +59,7 @@
             </div>
             <div class="seatMap"></div>
             <div class="map"></div>
-        </section>
+        </section><!--.searchResults end-->
 
         <section class="savedEvents">
             <ul class="savedEventsList"></ul>

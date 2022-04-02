@@ -3,3 +3,19 @@
     width: 85%;
     margin: 0 auto;
 }
+
+button{
+    background-color: $buttonColor;
+    color:white;
+    padding: 15px 25px;
+    display: inline-block;
+    margin: 20px auto 30px auto;
+    border:none;
+    cursor: pointer;
+
+    &:hover,
+    &:focus{
+        background-color: $buttonHover;
+        color:white;
+    }
+}
