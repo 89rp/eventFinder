@@ -27,8 +27,8 @@ eventApp.getEvents = function(city,category,startDate,endDate){
 
     fetch(url).then(response=>response.json())
     .then(jsonResponse => {
-        console.log(jsonResponse);
-        // console.log(jsonResponse["_embedded"]["events"]);
+        // console.log(jsonResponse);
+        console.log(jsonResponse["_embedded"]["events"]);
     });
 }
 
@@ -38,10 +38,20 @@ eventApp.displayEvents = function(){
     const form = document.querySelector("form");
     form.addEventListener("submit", function(event){
         event.preventDefault();
-        const selectedCity = document.querySelector("select[name=cityName]");
-        console.log(selectedCity);
-    });
-}
+        const selectedCity = document.querySelector("select[name=cityName]").value;
+        const selectedCategory = document.querySelector(
+        "select[name=categoryName]").value;
+        const startDate = document.querySelector("input[name=startDate]").value + "T07:00:00Z";
+        const endDate =document.querySelector("input[name=endDate]").value + "T00:00:00Z";
+        
+        if (endDate<startDate){
+            alert("error");
+        }
 
+        // console.log(selectedCity,selectedCategory,startDate,endDate);
+
+        eventApp.getEvents(selectedCity, selectedCategory,startDate,endDate);
+    });
+};
 
 eventApp.init();
