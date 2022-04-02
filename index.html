@@ -49,13 +49,16 @@
                                 <option value="artsTheatre">Arts & Theatre</option>
                             </select>
                         </div>
-                        <div class="dateDropDown">
-                            <label for="date">Date: </label>
-                            <select name="date" id="date" required>
-                                <option value="" disabled selected>Select date</option>
-                            </select>
+                        <div class="startDateDropDown">
+                            <label for="startDate">Start Date: </label>
+                            <input type="date" name="startDate" class="startDate" id="startDate" required>
                         </div>
                     </div>
+                    <div class="endDateDropDown">
+                        <label for="endDate">End Date: </label>
+                        <input type="date" name="endDate" class="endDate" id="endDate" required>
+                    </div>
+                </div>
                     <button type="submit" class="button">Show Me Events!</button>
                 </form>
             </div><!--.wrapper end-->
