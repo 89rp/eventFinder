@@ -1,0 +1,26 @@
+.searchResults{
+    background-color: $backgroundResults;
+    padding:50px 0;
+
+    .resultsListItem{
+        display:flex;
+        align-items:center;
+        justify-content: space-between;
+        padding:20px;
+        background:white;
+        margin-top:10px;
+    }
+
+    .eventImage{
+        width: calc(30% - 20px);
+
+        img{
+            object-fit:cover;
+            height: 100%;
+        }
+    }
+
+    .eventInfo{
+        width:70%;
+    }
+}

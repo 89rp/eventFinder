@@ -12,10 +12,16 @@ button{
     margin: 20px auto 30px auto;
     border:none;
     cursor: pointer;
+    transition:0.3s;
 
     &:hover,
     &:focus{
-        background-color: $buttonHover;
-        color:white;
+        opacity:0.8;
+        // background-color: $buttonHover;
     }
+}
+
+img{
+    width:100%;
+    display: block;
 }

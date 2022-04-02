@@ -241,10 +241,31 @@ html {
 
 body {
   font-family: "Ubuntu", sans-serif;
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: normal;
-  line-height: 2.5rem;
+  line-height: 3.2rem;
   letter-spacing: 0.2rem;
+}
+
+h1, h2, h3, h4, p,
+ul, li, a, input {
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+a:hover, a:focus {
+  color: #040218;
 }
 
 h1 {
@@ -269,17 +290,23 @@ header p {
 }
 
 button {
-  background-color: #2F9383;
+  background-color: #1BAB1E;
   color: white;
   padding: 15px 25px;
   display: inline-block;
   margin: 20px auto 30px auto;
   border: none;
   cursor: pointer;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 button:hover, button:focus {
-  background-color: #ACBAC8;
-  color: white;
+  opacity: 0.8;
+}
+
+img {
+  width: 100%;
+  display: block;
 }
 
 header {
@@ -307,19 +334,18 @@ header .wrapper {
 }
 
 .dropDownMenus {
-  background-color: #ECECE3;
+  background-color: #040218;
+  color: white;
 }
 .dropDownMenus .wrapper {
-  padding: 100px 0;
+  padding: 30px 0;
 }
 .dropDownMenus form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -330,4 +356,41 @@ header .wrapper {
   display: -ms-flexbox;
   display: flex;
   gap: 25px;
+}
+
+.searchResults {
+  background-color: #ECECE3;
+  padding: 50px 0;
+}
+.searchResults .resultsListItem {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 20px;
+  background: white;
+  margin-top: 10px;
+}
+.searchResults .eventImage {
+  width: calc(30% - 20px);
+}
+.searchResults .eventImage img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100%;
+}
+.searchResults .eventInfo {
+  width: 70%;
+}
+
+footer {
+  padding: 15px 0;
+  text-align: center;
+  background-color: #1BAB1E;
+  color: white;
 }
