@@ -8,10 +8,9 @@
 
     form{
         display:flex;
-        // flex-direction: column;
         flex-wrap: wrap;
         align-items: center;
-        gap:25px;
+        justify-content: space-around;
     }
 
     form>div{
