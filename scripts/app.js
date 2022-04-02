@@ -6,7 +6,10 @@ eventApp.rootUrl = "https://app.ticketmaster.com/discovery/v2/events.json";
 eventApp.apikey = "fhu2YqTVmuailwGncJP1AepG4JgCzgk9";
 
 eventApp.init = function(){
-    eventApp.getEvents("Toronto", "Sports", "2022-04-03T07:00:00Z","2022-12-06T00:00:00Z");
+
+    eventApp.displayEvents();
+
+    // eventApp.getEvents("Toronto", "Sports", "2022-04-03T07:00:00Z","2022-12-06T00:00:00Z");
 };
 
 
@@ -28,5 +31,17 @@ eventApp.getEvents = function(city,category,startDate,endDate){
         // console.log(jsonResponse["_embedded"]["events"]);
     });
 }
+
+
+//function to retrieve user selections upon form submission, and retrieve events from API
+eventApp.displayEvents = function(){
+    const form = document.querySelector("form");
+    form.addEventListener("submit", function(event){
+        event.preventDefault();
+        const selectedCity = document.querySelector("select[name=cityName]");
+        console.log(selectedCity);
+    });
+}
+
 
 eventApp.init();
