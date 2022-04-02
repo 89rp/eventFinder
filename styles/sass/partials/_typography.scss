@@ -1,0 +1,27 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: $bodyFont, sans-serif;
+    font-size: 1.8rem;
+    font-weight:normal;
+    // color:$black;
+    line-height: 2.5rem;
+    letter-spacing: 0.2rem;
+}
+
+h1{
+    font-family: $headerFont, cursive;
+    font-weight:400;
+    font-size:5rem;
+    letter-spacing: 0.4rem;
+    line-height: 5rem;
+    color:$headerMain;
+}
+
+header {
+    p{
+        color:$headerAccent;
+    }
+}
