@@ -1,0 +1,20 @@
+.dropDownMenus{
+    background-color: $backgroundSearch;
+    color:white;
+
+    .wrapper{
+        padding:30px 0;
+    }
+
+    form{
+        display:flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    form>div{
+        display:flex;
+        gap:25px;
+    }
+}

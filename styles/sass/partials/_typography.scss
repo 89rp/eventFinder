@@ -1,0 +1,50 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: $bodyFont, sans-serif;
+    font-size: 2rem;
+    font-weight:normal;
+    line-height: 3.2rem;
+    letter-spacing: 0.2rem;
+}
+
+h1,h2,h3,h4,p,
+ul, li, a, input{
+    padding:0;
+    margin:0;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    cursor:pointer;
+    transition: 0.3s;
+
+    &:hover,
+    &:focus{
+        color:$backgroundSearch;
+    }
+}
+
+h1{
+    font-family: $accentFont, cursive;
+    font-weight:400;
+    font-size:12rem;
+    letter-spacing: 0.6rem;
+    line-height: 12rem;
+    color:$headerMain;
+}
+
+header {
+    p{
+        color:$headerAccent;
+        font-size: 3rem;
+        line-height: 4rem;
+    }
+}

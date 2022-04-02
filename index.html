@@ -5,55 +5,102 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Event Finder</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Graduate&family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet"> 
+
+    <link rel="stylesheet" href="./styles/styles.css">
 </head>
 
 <body>
 
     <header>
-        <h1>Event Finder</h1>
-        <p>An app designed to show you what events are available at an arena near you!</p>
+        <div class="wrapper">
+            <h1>Event Finder</h1>
+            <p>An app designed to show you what events are available at an arena near you!</p>
+        </div>
     </header>
 
     <main>
         <section class="dropDownMenus">
-            <form action="" method="" class="finderForm" name="finderForm">
-                <div class="venueDropDown">
-                    <label for="venue">Venue: </label>
-                    <select name="venueName" id="venue" required>
-                        <option value="" disabled selected>--Please choose an option--</option>
-                    </select>
-                </div>
-                <div class="categoryDropDown">
-                    <label for="category">Category: </label>
-                    <select name="categoryName" id="category" required>
-                        <option value="" disabled selected>--Please choose an option--</option>
-                    </select>
-                </div>
-                <div class="dateDropDown">
-                    <label for="date">Date: </label>
-                    <select name="date" id="date" required>
-                        <option value="" disabled selected>--Please choose an option--</option>
-                    </select>
-                </div>
-                <button type="submit" class="button">Show Me Events!</button>
-            </form>
-        </section>
+            <div class="wrapper">
+                <form action="" method="" class="finderForm" name="finderForm">
+                    <div>
+                        <div class="venueDropDown">
+                            <label for="venue">Venue: </label>
+                            <select name="venueName" id="venue" required>
+                                <option value="" disabled selected>Select venue</option>
+                            </select>
+                        </div>
+                        <div class="categoryDropDown">
+                            <label for="category">Category: </label>
+                            <select name="categoryName" id="category" required>
+                                <option value="" disabled selected>Select category</option>
+                            </select>
+                        </div>
+                        <div class="dateDropDown">
+                            <label for="date">Date: </label>
+                            <select name="date" id="date" required>
+                                <option value="" disabled selected>Select date</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="button">Show Me Events!</button>
+                </form>
+            </div><!--.wrapper end-->
+        </section><!--.dropDownMenus end-->
 
         <section class="searchResults">
-            <div class="resultsContainer">
-                <ul class="textResults"></ul>
-            <button class="button">Add to Saved Items</button>
-            </div>
-            <div class="seatMap"></div>
-            <div class="map"></div>
-        </section>
+            <div class="wrapper">
+                <ul class="resultsContainer">
+                    <li class="resultsListItem">
+                        <div class="eventImage">
+                            <img src="http://placekitten.com/200/300">
+                        </div>
+                        <div class="eventInfo">
+                            <p>Name: Lorem ipsum dolor sit amet.</p>
+                            <p>Venue: FedEx Forum</p>
+                            <p>Date: 2022-04-01</p>
+                            <p>Time: 4:00pm</p>
+                            <p>Price Range: $25 - $100</p>
+                            <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repellendus ut tempore vitae sed dignissimos recusandae quas perspiciatis eveniet impedit!</p>
+                            <button class="button">Add to Saved Items</button>
+                        </div><!--eventInfo end-->
+                    </li>
+                    <li class="resultsListItem">
+                        <div class="eventImage">
+                            <img src="http://placekitten.com/200/300">
+                        </div>
+                        <div class="eventInfo">
+                            <p>Name: Lorem ipsum dolor sit amet.</p>
+                            <p>Venue: FedEx Forum</p>
+                            <p>Date: 2022-04-01</p>
+                            <p>Time: 4:00pm</p>
+                            <p>Price Range: $25 - $100</p>
+                            <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repellendus ut tempore vitae sed dignissimos recusandae quas perspiciatis eveniet impedit!</p>
+                            <button class="button">Add to Saved Items</button>
+                        </div><!--eventInfo end-->
+                    </li>
+                </ul><!--resultsContainer end-->
+                <div class="seatMap">
+
+                </div>
+                <div class="map">
+
+                </div>
+            </div><!--.wrapper end-->
+        </section><!--.searchResults end-->
 
         <section class="savedEvents">
             <ul class="savedEventsList"></ul>
-        </section>
+        </section><!--.savedEvents end-->
         
     </main>
+    <footer>
+        <p>Created at <a href="https://junocollege.com/" target="_blank">Juno College</a></p>
+    </footer>
 
 </body>
 
