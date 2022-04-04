@@ -28,54 +28,53 @@ eventApp.getEvents = function(city,category,startDate,endDate){
     fetch(url).then(response=>response.json())
     .then(jsonResponse => {
         // console.log(jsonResponse);
-        // console.log(jsonResponse["_embedded"]["events"]);
-        eventApp.displayEvents(jsonResponse["_embedded"]["events"]
-        )
+        console.log(jsonResponse["_embedded"]["events"]);
+        eventApp.displayEvents(jsonResponse["_embedded"]["events"]);
     });
 }
 
 
 eventApp.displayEvents = function(events) {
 
-    document.querySelector(".resultsContainer").innerHTML = ""
+    document.querySelector(".resultsContainer").innerHTML = "";
 
     events.forEach(eventListing => {
+        const listItem = document.createElement("li");
+        listItem.classList.add("resultsListItem");       
 
+        const eventImage = document.createElement("div");
+        eventImage.classList.add("eventImage");
 
-        const listItem = document.createElement("li")
-        listItem.classList.add("resultsListItem")        
+        const image = document.createElement("img");
+        image.src = eventListing.images[0].url;
+        image.alt = eventListing.name;
 
-        const eventImage = document.createElement("div")
-        eventImage.classList.add("eventImage")
+        eventImage.appendChild(image);
 
-        const image = document.createElement("img")
-        image.src = eventListing.images[0].url
-        image.alt = eventListing.name
+        const eventInfo = document.createElement("div");
+        eventInfo.classList.add("eventInfo");
 
-        eventImage.appendChild(image)
+        try {
+            eventInfo.innerHTML = `
+                    
+            <p>Name: ${eventListing.name}</p>
+            <p>Venue: ${eventListing._embedded.venues[0].name}</p>
+            <p>Date: ${eventListing.dates.start.localDate}</p>
+            <p>Time: ${eventListing.dates.start.localTime}</p>
+            <p>Price Range: $${eventListing.priceRanges[0].min} - $${eventListing.priceRanges[0].max}</p>
+            <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repellendus ut tempore vitae sed dignissimos recusandae quas perspiciatis eveniet impedit!</p>
+            <button class="button">Add to Saved Items</button>
+            <button class="button">Seat Map</button>
+            <button class="button">Directions</button>`;
 
-        const eventInfo = document.createElement("div")
-        eventInfo.classList.add("eventInfo")
+            listItem.appendChild(eventImage);
+            listItem.appendChild(eventInfo);
 
-        eventInfo.innerHTML = `
-        
-        <p>Name: ${eventListing.name}</p>
-        <p>Venue: ${eventListing._embedded.venues[0].name}</p>
-        <p>Date: ${eventListing.dates.start.localDate}</p>
-        <p>Time: ${eventListing.dates.start.localTime}</p>
-        <p>Price Range: $${eventListing.priceRanges[0].min} - $${eventListing.priceRanges[0].max}</p>
-        <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repellendus ut tempore vitae sed dignissimos recusandae quas perspiciatis eveniet impedit!</p>
-        <button class="button">Add to Saved Items</button>
-        <button class="button">Seat Map</button>
-        <button class="button">Directions</button>`
+            document.querySelector(".resultsContainer").appendChild(listItem);
 
-        listItem.appendChild(eventImage)
-        listItem.appendChild(eventInfo)
-
-        document.querySelector(".resultsContainer").appendChild(listItem)
-
-        console.log(listItem)
-
+        } catch (err) {
+            console.log(err);
+        }
     })
 
 }
