@@ -1,0 +1,58 @@
+@media (max-width: 940px) {
+
+    header {
+    
+        h1 {
+            font-size: 8rem
+        }
+
+        p {
+            font-size: 2.5rem;
+        }
+    }
+
+    .resultsListItem {
+        flex-direction: column;
+    }
+
+    .eventInfo {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    form, form>div {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 800px) {
+    
+    header {
+
+        h1 {
+            font-size: 7rem
+        }
+        
+        p {
+            font-size: 2rem;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+
+    label, select, input, p, button {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 400px) {
+
+    header {
+        
+        h1 {
+            font-size: 6rem;
+        }
+    }
+}
