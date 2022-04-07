@@ -54,30 +54,73 @@ eventApp.displayEvents = function(events) {
         const eventInfo = document.createElement("div");
         eventInfo.classList.add("eventInfo");
 
+
+        // some listings are missing properties (e.g. price, description),
+        // we need to catch these errors and display an alternative
+        //TODO move this code into a function
+        const name = document.createElement("h2");
         try {
-            eventInfo.innerHTML = `
-                    
-            <p>Name: ${eventListing.name}</p>
-            <p>Venue: ${eventListing._embedded.venues[0].name}</p>
-            <p>Date: ${eventListing.dates.start.localDate}</p>
-            <p>Time: ${eventListing.dates.start.localTime}</p>
-            <p>Price Range: $${eventListing.priceRanges[0].min} - $${eventListing.priceRanges[0].max}</p>
-            <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repellendus ut tempore vitae sed dignissimos recusandae quas perspiciatis eveniet impedit!</p>
+            name.innerText = eventListing.name;
+        } catch {
+            name.innerText = "";
+        }
+
+        const venue = document.createElement("p");
+        try {
+            venue.innerText = `Venue: ${eventListing._embedded.venues[0].name}`;
+        } catch {
+            venue.innerText = `Venue: N/A`;
+        }
+
+        const date = document.createElement("p");
+        try {
+            date.innerText = `Date: ${eventListing.dates.start.localDate}`;
+        } catch {
+            date.innerText = `Date: N/A`;
+        }
+
+        //TODO - change time format
+        const time = document.createElement("p");
+        try {
+            time.innerText = `Time: ${eventListing.dates.start.localTime}`;
+        } catch {
+            time.innerText = `Time: Unknown`;
+        }
+
+        //TODO - either remove decimal places or print price with 2 decimal places
+        const price = document.createElement("p");
+        try{
+            price.innerText = `Price Range: $${eventListing.priceRanges[0].min} - $${eventListing.priceRanges[0].max}`;
+        } catch{
+            price.innerText=`Price: N/A`;
+        }
+
+        const description = document.createElement("p");
+        try {
+            const fullDescription = eventListing.description;
+            const parsedDescription = fullDescription.split(/\r?\n/);
+            description.innerText = parsedDescription[0];
+        } catch {
+            description.innerText = ``;
+        }
+
+        eventInfo.append(name, venue,date,time,price,description);
+
+        const buttonDiv = document.createElement("div");
+        buttonDiv.innerHTML = `
             <button class="button">Add to Saved Items</button>
             <button class="button">Seat Map</button>
-            <button class="button">Directions</button>`;
+            <button class="button">Directions</button>`
 
-            listItem.appendChild(eventImage);
-            listItem.appendChild(eventInfo);
+        eventInfo.appendChild(buttonDiv);
 
-            document.querySelector(".resultsContainer").appendChild(listItem);
+        listItem.appendChild(eventImage);
+        listItem.appendChild(eventInfo);
 
-        } catch (err) {
-            console.log(err);
-        }
-    })
-
+        document.querySelector(".resultsContainer").appendChild(listItem);
+    });
 }
+
 
 //function to retrieve user selections upon form submission, and retrieve events from API
 eventApp.getUserInput = function(){
@@ -87,8 +130,8 @@ eventApp.getUserInput = function(){
         const selectedCity = document.querySelector("select[name=cityName]").value;
         const selectedCategory = document.querySelector(
         "select[name=categoryName]").value;
-        const startDate = document.querySelector("input[name=startDate]").value + "T07:00:00Z";
-        const endDate =document.querySelector("input[name=endDate]").value + "T00:00:00Z";
+        const startDate = document.querySelector("input[name=startDate]").value + "T06:00:00Z";
+        const endDate =document.querySelector("input[name=endDate]").value + "T07:00:00Z";
         
         if (endDate<startDate){
             alert("error");
