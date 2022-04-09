@@ -135,7 +135,7 @@ eventApp.getUserInput = function(){
         
         if (selectedCategory === "All") {
             selectedCategory = ""
-        }
+        } //Added all filter to display all available events 
 
         if (endDate<startDate){
             alert("error");
