@@ -1,15 +1,11 @@
 const eventApp = {};
 
-//consumer key: fhu2YqTVmuailwGncJP1AepG4JgCzgk9
-
 eventApp.rootUrl = "https://app.ticketmaster.com/discovery/v2/events.json";
 eventApp.apikey = "fhu2YqTVmuailwGncJP1AepG4JgCzgk9";
 
 eventApp.init = function(){
 
     eventApp.getUserInput();
-
-    // eventApp.getEvents("Toronto", "Sports", "2022-04-03T07:00:00Z","2022-12-06T00:00:00Z");
 };
 
 
@@ -27,19 +23,18 @@ eventApp.getEvents = function(city,category,startDate,endDate){
 
     fetch(url).then(response=>response.json())
     .then(jsonResponse => {
-        // console.log(jsonResponse);
-        console.log(jsonResponse["_embedded"]["events"]);
+        // console.log(jsonResponse["_embedded"]["events"]);
         eventApp.displayEvents(jsonResponse["_embedded"]["events"]);
     });
 }
 
+// added createEventInfo function to minimize code in displayEvents function
 eventApp.createEventInfo = function(eventListing){
     const eventInfo = document.createElement("div");
         eventInfo.classList.add("eventInfo");
 
-
         // some listings are missing properties (e.g. price, description),
-        // we need to catch these errors and display an alternative
+        // added try-catch blocks to catch these errors and display an alternative
 
         const name = document.createElement("h2");
         try {
@@ -62,6 +57,7 @@ eventApp.createEventInfo = function(eventListing){
             date.innerText = `Date: N/A`;
         }
 
+        //API returns military time, code block created to display time in a user friendly format
         const time = document.createElement("p");
         try {
 
@@ -85,7 +81,7 @@ eventApp.createEventInfo = function(eventListing){
 
         const price = document.createElement("p");
         try{
-            price.innerText = `Price Range: $${Math.round(eventListing.priceRanges[0].min)} - $${Math.round(eventListing.priceRanges[0].max)}`;
+            price.innerText = `Price Range: $${Math.round(eventListing.priceRanges[0].min)} - $${Math.round(eventListing.priceRanges[0].max)}`; //rounded pricing to nearest dollar
         } catch{
             price.innerText=`Price: N/A`;
         }
@@ -104,7 +100,6 @@ eventApp.createEventInfo = function(eventListing){
         const buttonDiv = document.createElement("div");
         buttonDiv.innerHTML = `
             <button class="button">Seat Map</button>`
-
         eventInfo.appendChild(buttonDiv);
 
         return eventInfo
@@ -150,8 +145,6 @@ eventApp.getUserInput = function(){
         if (endDate<startDate){
             alert("error");
         }
-
-        // console.log(selectedCity,selectedCategory,startDate,endDate);
 
         eventApp.getEvents(selectedCity, selectedCategory,startDate,endDate);
     });
