@@ -103,9 +103,7 @@ eventApp.createEventInfo = function(eventListing){
 
         const buttonDiv = document.createElement("div");
         buttonDiv.innerHTML = `
-            <button class="button">Add to Saved Items</button>
-            <button class="button">Seat Map</button>
-            <button class="button">Directions</button>`
+            <button class="button">Seat Map</button>`
 
         eventInfo.appendChild(buttonDiv);
 
