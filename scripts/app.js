@@ -33,31 +33,14 @@ eventApp.getEvents = function(city,category,startDate,endDate){
     });
 }
 
-
-eventApp.displayEvents = function(events) {
-
-    document.querySelector(".resultsContainer").innerHTML = "";
-
-    events.forEach(eventListing => {
-        const listItem = document.createElement("li");
-        listItem.classList.add("resultsListItem");       
-
-        const eventImage = document.createElement("div");
-        eventImage.classList.add("eventImage");
-
-        const image = document.createElement("img");
-        image.src = eventListing.images[0].url;
-        image.alt = eventListing.name;
-
-        eventImage.appendChild(image);
-
-        const eventInfo = document.createElement("div");
+eventApp.createEventInfo = function(eventListing){
+    const eventInfo = document.createElement("div");
         eventInfo.classList.add("eventInfo");
 
 
         // some listings are missing properties (e.g. price, description),
         // we need to catch these errors and display an alternative
-        //TODO move this code into a function
+
         const name = document.createElement("h2");
         try {
             name.innerText = eventListing.name;
@@ -126,9 +109,30 @@ eventApp.displayEvents = function(events) {
 
         eventInfo.appendChild(buttonDiv);
 
-        listItem.appendChild(eventImage);
-        listItem.appendChild(eventInfo);
+        return eventInfo
+}
 
+eventApp.displayEvents = function(events) {
+
+    document.querySelector(".resultsContainer").innerHTML = "";
+
+    events.forEach(eventListing => {
+        const listItem = document.createElement("li");
+        listItem.classList.add("resultsListItem");       
+
+        const eventImage = document.createElement("div");
+        eventImage.classList.add("eventImage");
+
+        const image = document.createElement("img");
+        image.src = eventListing.images[0].url;
+        image.alt = eventListing.name;
+
+        
+        eventImage.appendChild(image);
+        const eventInfoDiv = eventApp.createEventInfo(eventListing)
+        listItem.appendChild(eventImage);
+        listItem.appendChild(eventInfoDiv);
+        
         document.querySelector(".resultsContainer").appendChild(listItem);
     });
 }
