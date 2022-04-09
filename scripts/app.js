@@ -87,10 +87,9 @@ eventApp.displayEvents = function(events) {
             time.innerText = `Time: Unknown`;
         }
 
-        //TODO - either remove decimal places or print price with 2 decimal places
         const price = document.createElement("p");
         try{
-            price.innerText = `Price Range: $${eventListing.priceRanges[0].min} - $${eventListing.priceRanges[0].max}`;
+            price.innerText = `Price Range: $${Math.round(eventListing.priceRanges[0].min)} - $${Math.round(eventListing.priceRanges[0].max)}`;
         } catch{
             price.innerText=`Price: N/A`;
         }
