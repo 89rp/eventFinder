@@ -79,10 +79,23 @@ eventApp.displayEvents = function(events) {
             date.innerText = `Date: N/A`;
         }
 
-        //TODO - change time format
         const time = document.createElement("p");
         try {
-            time.innerText = `Time: ${eventListing.dates.start.localTime}`;
+
+            const timeText = (eventListing.dates.start.localTime).split(":")
+
+            let timeHours = timeText[0]
+            let timeMinutes = timeText[1]
+            let timeOfDay = "AM"
+
+            if (timeHours >= 12) {
+                timeOfDay = "PM"
+                if (timeHours > 12) {
+                    timeHours -= 12
+                }
+            }
+
+            time.innerText = `Time: ${timeHours}:${timeMinutes} ${timeOfDay}`;
         } catch {
             time.innerText = `Time: Unknown`;
         }
