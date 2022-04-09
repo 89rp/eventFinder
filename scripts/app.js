@@ -6,7 +6,7 @@ eventApp.rootUrl = "https://app.ticketmaster.com/discovery/v2/events.json";
 eventApp.apikey = "fhu2YqTVmuailwGncJP1AepG4JgCzgk9";
 
 eventApp.init = function(){
-
+    eventApp.seatMapEventListener();
     eventApp.getUserInput();
 
     // eventApp.getEvents("Toronto", "Sports", "2022-04-03T07:00:00Z","2022-12-06T00:00:00Z");
@@ -109,7 +109,7 @@ eventApp.displayEvents = function(events) {
         const buttonDiv = document.createElement("div");
         buttonDiv.innerHTML = `
             <button class="button">Add to Saved Items</button>
-            <button class="button">Seat Map</button>
+            <button class="button seatMap">Seat Map</button>
             <button class="button">Directions</button>`
 
         eventInfo.appendChild(buttonDiv);
@@ -142,5 +142,28 @@ eventApp.getUserInput = function(){
         eventApp.getEvents(selectedCity, selectedCategory,startDate,endDate);
     });
 };
+
+eventApp.seatMapEventListener = function(){
+    const seatMapButton = document.querySelector(".seatMap");
+    const popupOverlay = document.querySelector(".popup-background");
+    seatMapButton.addEventListener("click", () => {
+        popupOverlay.classList.add("show-popup");
+    });
+
+    const closePopupButton = document.querySelector("#close-popup-button");
+    closePopupButton.addEventListener("click", () => {
+        popupOverlay.classList.remove("show-popup");
+    });
+
+    const popupContainer = document.querySelector(".popup-container");
+    popupContainer.addEventListener("click", (event) => {
+        if (event.target === popupContainer) {
+            popupOverlay.classList.remove("show-popup");
+        }
+    });
+};
+
+
+
 
 eventApp.init();
