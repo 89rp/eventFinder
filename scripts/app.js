@@ -128,11 +128,15 @@ eventApp.getUserInput = function(){
     form.addEventListener("submit", function(event){
         event.preventDefault();
         const selectedCity = document.querySelector("select[name=cityName]").value;
-        const selectedCategory = document.querySelector(
+        let selectedCategory = document.querySelector(
         "select[name=categoryName]").value;
         const startDate = document.querySelector("input[name=startDate]").value + "T06:00:00Z";
         const endDate =document.querySelector("input[name=endDate]").value + "T07:00:00Z";
         
+        if (selectedCategory === "All") {
+            selectedCategory = ""
+        }
+
         if (endDate<startDate){
             alert("error");
         }
