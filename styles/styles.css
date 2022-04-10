@@ -349,14 +349,30 @@ header .wrapper {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+.dropDownMenus form label, .dropDownMenus form select {
+  display: block;
+  text-align: center;
+}
+.dropDownMenus form select, .dropDownMenus form input[type=date] {
+  border-style: none;
+  width: 175px;
+  height: 35px;
+  text-align: center;
+}
+.dropDownMenus form input[type=date] {
+  padding-left: 15px;
+}
+.dropDownMenus form div div {
+  padding: 0 33px;
 }
 .dropDownMenus form > div {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 25px;
 }
 
 .searchResults {
@@ -422,11 +438,20 @@ footer {
     text-align: center;
   }
 
-  form, form > div {
+  .dropDownMenus form {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+  }
+  .dropDownMenus form > div {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .dropDownMenus form div div {
+    padding: 10px 0;
   }
 }
 @media (max-width: 800px) {
