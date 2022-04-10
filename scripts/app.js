@@ -4,8 +4,9 @@ eventApp.rootUrl = "https://app.ticketmaster.com/discovery/v2/events.json";
 eventApp.apikey = "fhu2YqTVmuailwGncJP1AepG4JgCzgk9";
 
 eventApp.init = function(){
-    eventApp.seatMapEventListener();
+    
     eventApp.getUserInput();
+    eventApp.seatMapEventListener();
 };
 
 
@@ -108,8 +109,8 @@ eventApp.createEventInfo = function(eventListing){
 eventApp.createPopUpDiv = function(popupImageSrc, popupImageAlt){
 
     const popUpDiv = document.createElement("div");
+    popUpDiv.classList.add("popup-background");
     popUpDiv.innerHTML = `
-        <div class="popup-background">
             <div class="popup-container">
                 <div class="popup wrapper">
                     <div class="button-container">
@@ -120,7 +121,6 @@ eventApp.createPopUpDiv = function(popupImageSrc, popupImageAlt){
                     </div>
                 </div><!--.popup .wrapper end-->
             </div> <!--.pop-up container end-->
-        </div> <!--.popup-background end-->
     `;
     return popUpDiv;
 }
@@ -154,7 +154,6 @@ eventApp.displayEvents = function(events) {
             const seatMapAlt = "Seat map:" + eventListing.name;
             seatMapDiv = this.createPopUpDiv(seatMapUrl, seatMapAlt);
             listItem.appendChild(seatMapDiv);
-            console.log(seatMapDiv);
         } catch {
             console.log("no seat map available");
         }
@@ -163,6 +162,8 @@ eventApp.displayEvents = function(events) {
         
         document.querySelector(".resultsContainer").appendChild(listItem);
     });
+
+    eventApp.seatMapEventListener();
 }
 
 
@@ -190,23 +191,32 @@ eventApp.getUserInput = function(){
 };
 
 eventApp.seatMapEventListener = function(){
-    const seatMapButton = document.querySelector(".seatMap");
-    const popupOverlay = document.querySelector(".popup-background");
-    seatMapButton.addEventListener("click", () => {
+    const seatMapButtons = document.querySelectorAll(".seatMap");
+    
+    //if show seat map button pushed, then display popup on screen
+    seatMapButtons.forEach(button => button.addEventListener("click", (event) => {
+        const popupOverlay = event.target.parentNode.parentNode.nextElementSibling;
+        console.log(popupOverlay);
         popupOverlay.classList.add("show-popup");
-    });
+    }));
 
-    const closePopupButton = document.querySelector("#close-popup-button");
-    closePopupButton.addEventListener("click", () => {
+    //close pop up if
+    // a) X button on pop up clicked or
+    // b) user clicks outside of the pop up image
+
+    const closePopupButtons = document.querySelectorAll("#close-popup-button");
+    closePopupButtons.forEach(button=> button.addEventListener("click", (event) => {
+        const popupOverlay = event.target.closest(".popup-background");
         popupOverlay.classList.remove("show-popup");
-    });
+    }));
 
-    const popupContainer = document.querySelector(".popup-container");
-    popupContainer.addEventListener("click", (event) => {
-        if (event.target === popupContainer) {
+    const popupContainer = document.querySelectorAll(".popup-container");
+    popupContainer.forEach(container => container.addEventListener("click", (event)=>{
+        const popupOverlay = event.target.closest(".popup-background");
+        if (event.target === container) {
             popupOverlay.classList.remove("show-popup");
         }
-    });
+    }));
 };
 
 eventApp.init();
