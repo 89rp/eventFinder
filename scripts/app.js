@@ -98,10 +98,7 @@ eventApp.createEventInfo = function(eventListing){
 
         eventInfo.append(name, venue,date,time,price,description);
 
-        const buttonDiv = document.createElement("div");
-        buttonDiv.innerHTML = `<button class="button seatMap">Seat Map</button>`
-
-        eventInfo.appendChild(buttonDiv);
+        
 
         return eventInfo;
 }
@@ -146,20 +143,28 @@ eventApp.displayEvents = function(events) {
 
 
         listItem.appendChild(eventImage);
-        listItem.appendChild(eventInfoDiv);
+        // listItem.appendChild(eventInfoDiv);
 
         let seatMapDiv;
         try{
             const seatMapUrl = eventListing.seatmap.staticUrl;
             const seatMapAlt = "Seat map:" + eventListing.name;
+
+            //if seat map exists
+            //1) add Seat Map button to events info div and add event info div to list item
+            const seatMapButtonDiv = document.createElement("div");
+            seatMapButtonDiv.innerHTML = `<button class="button seatMap">Seat Map</button>`;
+            eventInfoDiv.appendChild(seatMapButtonDiv);
+            listItem.appendChild(eventInfoDiv);
+
+            //2) create seat map pop up div and add it to list item
             seatMapDiv = this.createPopUpDiv(seatMapUrl, seatMapAlt);
             listItem.appendChild(seatMapDiv);
         } catch {
-            console.log("no seat map available");
+            //if seat map doesn't exist, add event info div to list item without seat map button or pop up
+            listItem.appendChild(eventInfoDiv);
         }
 
-        
-        
         document.querySelector(".resultsContainer").appendChild(listItem);
     });
 
