@@ -1,15 +1,11 @@
 const eventApp = {};
 
-//consumer key: fhu2YqTVmuailwGncJP1AepG4JgCzgk9
-
 eventApp.rootUrl = "https://app.ticketmaster.com/discovery/v2/events.json";
 eventApp.apikey = "fhu2YqTVmuailwGncJP1AepG4JgCzgk9";
 
 eventApp.init = function(){
     eventApp.seatMapEventListener();
     eventApp.getUserInput();
-
-    // eventApp.getEvents("Toronto", "Sports", "2022-04-03T07:00:00Z","2022-12-06T00:00:00Z");
 };
 
 
@@ -27,37 +23,19 @@ eventApp.getEvents = function(city,category,startDate,endDate){
 
     fetch(url).then(response=>response.json())
     .then(jsonResponse => {
-        // console.log(jsonResponse);
-        console.log(jsonResponse["_embedded"]["events"]);
+        // console.log(jsonResponse["_embedded"]["events"]);
         eventApp.displayEvents(jsonResponse["_embedded"]["events"]);
     });
 }
 
-
-eventApp.displayEvents = function(events) {
-
-    document.querySelector(".resultsContainer").innerHTML = "";
-
-    events.forEach(eventListing => {
-        const listItem = document.createElement("li");
-        listItem.classList.add("resultsListItem");       
-
-        const eventImage = document.createElement("div");
-        eventImage.classList.add("eventImage");
-
-        const image = document.createElement("img");
-        image.src = eventListing.images[0].url;
-        image.alt = eventListing.name;
-
-        eventImage.appendChild(image);
-
-        const eventInfo = document.createElement("div");
+// added createEventInfo function to minimize code in displayEvents function
+eventApp.createEventInfo = function(eventListing){
+    const eventInfo = document.createElement("div");
         eventInfo.classList.add("eventInfo");
 
-
         // some listings are missing properties (e.g. price, description),
-        // we need to catch these errors and display an alternative
-        //TODO move this code into a function
+        // added try-catch blocks to catch these errors and display an alternative
+
         const name = document.createElement("h2");
         try {
             name.innerText = eventListing.name;
@@ -79,18 +57,31 @@ eventApp.displayEvents = function(events) {
             date.innerText = `Date: N/A`;
         }
 
-        //TODO - change time format
+        //API returns military time, code block created to display time in a user friendly format
         const time = document.createElement("p");
         try {
-            time.innerText = `Time: ${eventListing.dates.start.localTime}`;
+
+            const timeText = (eventListing.dates.start.localTime).split(":")
+
+            let timeHours = timeText[0]
+            let timeMinutes = timeText[1]
+            let timeOfDay = "AM"
+
+            if (timeHours >= 12) {
+                timeOfDay = "PM"
+                if (timeHours > 12) {
+                    timeHours -= 12
+                }
+            }
+
+            time.innerText = `Time: ${timeHours}:${timeMinutes} ${timeOfDay}`;
         } catch {
             time.innerText = `Time: Unknown`;
         }
 
-        //TODO - either remove decimal places or print price with 2 decimal places
         const price = document.createElement("p");
         try{
-            price.innerText = `Price Range: $${eventListing.priceRanges[0].min} - $${eventListing.priceRanges[0].max}`;
+            price.innerText = `Price Range: $${Math.round(eventListing.priceRanges[0].min)} - $${Math.round(eventListing.priceRanges[0].max)}`; //rounded pricing to nearest dollar
         } catch{
             price.innerText=`Price: N/A`;
         }
@@ -107,16 +98,34 @@ eventApp.displayEvents = function(events) {
         eventInfo.append(name, venue,date,time,price,description);
 
         const buttonDiv = document.createElement("div");
-        buttonDiv.innerHTML = `
-            <button class="button">Add to Saved Items</button>
-            <button class="button seatMap">Seat Map</button>
-            <button class="button">Directions</button>`
+        buttonDiv.innerHTML = `<button class="button">Seat Map</button>`
 
         eventInfo.appendChild(buttonDiv);
 
-        listItem.appendChild(eventImage);
-        listItem.appendChild(eventInfo);
+        return eventInfo
+}
 
+eventApp.displayEvents = function(events) {
+
+    document.querySelector(".resultsContainer").innerHTML = "";
+
+    events.forEach(eventListing => {
+        const listItem = document.createElement("li");
+        listItem.classList.add("resultsListItem");       
+
+        const eventImage = document.createElement("div");
+        eventImage.classList.add("eventImage");
+
+        const image = document.createElement("img");
+        image.src = eventListing.images[0].url;
+        image.alt = eventListing.name;
+
+        
+        eventImage.appendChild(image);
+        const eventInfoDiv = eventApp.createEventInfo(eventListing)
+        listItem.appendChild(eventImage);
+        listItem.appendChild(eventInfoDiv);
+        
         document.querySelector(".resultsContainer").appendChild(listItem);
     });
 }
@@ -128,16 +137,18 @@ eventApp.getUserInput = function(){
     form.addEventListener("submit", function(event){
         event.preventDefault();
         const selectedCity = document.querySelector("select[name=cityName]").value;
-        const selectedCategory = document.querySelector(
+        let selectedCategory = document.querySelector(
         "select[name=categoryName]").value;
         const startDate = document.querySelector("input[name=startDate]").value + "T06:00:00Z";
         const endDate =document.querySelector("input[name=endDate]").value + "T07:00:00Z";
         
+        if (selectedCategory === "All") {
+            selectedCategory = ""
+        } //Added all filter to display all available events 
+
         if (endDate<startDate){
             alert("error");
         }
-
-        // console.log(selectedCity,selectedCategory,startDate,endDate);
 
         eventApp.getEvents(selectedCity, selectedCategory,startDate,endDate);
     });
