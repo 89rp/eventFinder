@@ -20,6 +20,7 @@
         select, input[type="date"] {
             border-style: none;
             width:175px;
+            height: 35px;
             text-align: center;
         }
 
@@ -37,5 +38,5 @@
         display:flex;
         // gap:25px;
     }
-    
+
 }

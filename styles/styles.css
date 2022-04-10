@@ -360,6 +360,7 @@ header .wrapper {
 .dropDownMenus form select, .dropDownMenus form input[type=date] {
   border-style: none;
   width: 175px;
+  height: 35px;
   text-align: center;
 }
 .dropDownMenus form input[type=date] {
