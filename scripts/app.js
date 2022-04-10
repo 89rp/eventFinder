@@ -23,7 +23,7 @@ eventApp.getEvents = function(city,category,startDate,endDate){
 
     fetch(url).then(response=>response.json())
     .then(jsonResponse => {
-        // console.log(jsonResponse["_embedded"]["events"]);
+        console.log(jsonResponse["_embedded"]["events"]);
         eventApp.displayEvents(jsonResponse["_embedded"]["events"]);
     });
 }
@@ -98,11 +98,31 @@ eventApp.createEventInfo = function(eventListing){
         eventInfo.append(name, venue,date,time,price,description);
 
         const buttonDiv = document.createElement("div");
-        buttonDiv.innerHTML = `<button class="button">Seat Map</button>`
+        buttonDiv.innerHTML = `<button class="button seatMap">Seat Map</button>`
 
         eventInfo.appendChild(buttonDiv);
 
-        return eventInfo
+        return eventInfo;
+}
+
+eventApp.createPopUpDiv = function(popupImageSrc, popupImageAlt){
+
+    const popUpDiv = document.createElement("div");
+    popUpDiv.innerHTML = `
+        <div class="popup-background">
+            <div class="popup-container">
+                <div class="popup wrapper">
+                    <div class="button-container">
+                        <button id="close-popup-button"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="pop-up-img">
+                        <img src=${popupImageSrc} alt=${popupImageAlt}>
+                    </div>
+                </div><!--.popup .wrapper end-->
+            </div> <!--.pop-up container end-->
+        </div> <!--.popup-background end-->
+    `;
+    return popUpDiv;
 }
 
 eventApp.displayEvents = function(events) {
@@ -122,9 +142,24 @@ eventApp.displayEvents = function(events) {
 
         
         eventImage.appendChild(image);
-        const eventInfoDiv = eventApp.createEventInfo(eventListing)
+        const eventInfoDiv = eventApp.createEventInfo(eventListing);
+
+
         listItem.appendChild(eventImage);
         listItem.appendChild(eventInfoDiv);
+
+        let seatMapDiv;
+        try{
+            const seatMapUrl = eventListing.seatmap.staticUrl;
+            const seatMapAlt = "Seat map:" + eventListing.name;
+            seatMapDiv = this.createPopUpDiv(seatMapUrl, seatMapAlt);
+            listItem.appendChild(seatMapDiv);
+            console.log(seatMapDiv);
+        } catch {
+            console.log("no seat map available");
+        }
+
+        
         
         document.querySelector(".resultsContainer").appendChild(listItem);
     });
@@ -173,8 +208,5 @@ eventApp.seatMapEventListener = function(){
         }
     });
 };
-
-
-
 
 eventApp.init();
