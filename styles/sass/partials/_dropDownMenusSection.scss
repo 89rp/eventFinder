@@ -6,15 +6,36 @@
         padding:30px 0;
     }
 
-    form{
+    form {
         display:flex;
         flex-wrap: wrap;
         align-items: center;
-        justify-content: space-around;
+        justify-content: space-evenly;
+
+        label, select {
+            display: block;
+            text-align: center;
+        }
+        
+        select, input[type="date"] {
+            border-style: none;
+            width:175px;
+            text-align: center;
+        }
+
+        input[type="date"] {
+            padding-left: 15px
+        }
+
+        div div {
+            padding: 0 33px;
+        }
+
     }
 
     form>div{
         display:flex;
-        gap:25px;
+        // gap:25px;
     }
+    
 }

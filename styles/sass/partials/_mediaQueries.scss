@@ -21,8 +21,20 @@
         text-align: center;
     }
 
-    form, form>div {
-        flex-direction: column;
+    .dropDownMenus{
+
+        form {
+        
+            flex-direction: column;
+        
+            >div {
+                flex-direction: column;
+            }
+        
+            div div {
+                padding: 10px 0;
+            }
+        }
     }
 }
 
