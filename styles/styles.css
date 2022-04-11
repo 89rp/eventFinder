@@ -429,7 +429,10 @@ footer {
             flex-direction: column;
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 815px) {
+  header {
+    height: 80vh;
+  }
   header h1 {
     font-size: 7rem;
   }
