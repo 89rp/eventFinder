@@ -504,7 +504,10 @@ footer {
     padding: 10px 0;
   }
 }
-@media (max-width: 800px) {
+@media (max-width: 815px) {
+  header {
+    height: 80vh;
+  }
   header h1 {
     font-size: 7rem;
   }
