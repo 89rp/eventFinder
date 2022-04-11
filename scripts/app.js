@@ -4,8 +4,9 @@ eventApp.rootUrl = "https://app.ticketmaster.com/discovery/v2/events.json";
 eventApp.apikey = "fhu2YqTVmuailwGncJP1AepG4JgCzgk9";
 
 eventApp.init = function(){
-
+    
     eventApp.getUserInput();
+    eventApp.seatMapEventListener();
 };
 
 
@@ -23,7 +24,7 @@ eventApp.getEvents = function(city,category,startDate,endDate){
 
     fetch(url).then(response=>response.json())
     .then(jsonResponse => {
-        // console.log(jsonResponse["_embedded"]["events"]);
+        console.log(jsonResponse["_embedded"]["events"]);
         eventApp.displayEvents(jsonResponse["_embedded"]["events"]);
     });
 }
@@ -97,12 +98,28 @@ eventApp.createEventInfo = function(eventListing){
 
         eventInfo.append(name, venue,date,time,price,description);
 
-        const buttonDiv = document.createElement("div");
-        buttonDiv.innerHTML = `
-            <button class="button">Seat Map</button>`
-        eventInfo.appendChild(buttonDiv);
+        
 
-        return eventInfo
+        return eventInfo;
+}
+
+eventApp.createPopUpDiv = function(popupImageSrc, popupImageAlt){
+
+    const popUpDiv = document.createElement("div");
+    popUpDiv.classList.add("popup-background");
+    popUpDiv.innerHTML = `
+            <div class="popup-container">
+                <div class="popup wrapper">
+                    <div class="button-container">
+                        <button id="close-popup-button"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="pop-up-img">
+                        <img src=${popupImageSrc} alt=${popupImageAlt}>
+                    </div>
+                </div><!--.popup .wrapper end-->
+            </div> <!--.pop-up container end-->
+    `;
+    return popUpDiv;
 }
 
 eventApp.displayEvents = function(events) {
@@ -122,12 +139,36 @@ eventApp.displayEvents = function(events) {
 
         
         eventImage.appendChild(image);
-        const eventInfoDiv = eventApp.createEventInfo(eventListing)
+        const eventInfoDiv = eventApp.createEventInfo(eventListing);
+
+
         listItem.appendChild(eventImage);
-        listItem.appendChild(eventInfoDiv);
-        
+        // listItem.appendChild(eventInfoDiv);
+
+        let seatMapDiv;
+        try{
+            const seatMapUrl = eventListing.seatmap.staticUrl;
+            const seatMapAlt = "Seat map:" + eventListing.name;
+
+            //if seat map exists
+            //1) add Seat Map button to events info div and add event info div to list item
+            const seatMapButtonDiv = document.createElement("div");
+            seatMapButtonDiv.innerHTML = `<button class="button seatMap">Seat Map</button>`;
+            eventInfoDiv.appendChild(seatMapButtonDiv);
+            listItem.appendChild(eventInfoDiv);
+
+            //2) create seat map pop up div and add it to list item
+            seatMapDiv = this.createPopUpDiv(seatMapUrl, seatMapAlt);
+            listItem.appendChild(seatMapDiv);
+        } catch {
+            //if seat map doesn't exist, add event info div to list item without seat map button or pop up
+            listItem.appendChild(eventInfoDiv);
+        }
+
         document.querySelector(".resultsContainer").appendChild(listItem);
     });
+
+    eventApp.seatMapEventListener();
 }
 
 
@@ -152,6 +193,35 @@ eventApp.getUserInput = function(){
 
         eventApp.getEvents(selectedCity, selectedCategory,startDate,endDate);
     });
+};
+
+eventApp.seatMapEventListener = function(){
+    const seatMapButtons = document.querySelectorAll(".seatMap");
+    
+    //if show seat map button pushed, then display popup on screen
+    seatMapButtons.forEach(button => button.addEventListener("click", (event) => {
+        const popupOverlay = event.target.parentNode.parentNode.nextElementSibling;
+        console.log(popupOverlay);
+        popupOverlay.classList.add("show-popup");
+    }));
+
+    //close pop up if
+    // a) X button on pop up clicked or
+    // b) user clicks outside of the pop up image
+
+    const closePopupButtons = document.querySelectorAll("#close-popup-button");
+    closePopupButtons.forEach(button=> button.addEventListener("click", (event) => {
+        const popupOverlay = event.target.closest(".popup-background");
+        popupOverlay.classList.remove("show-popup");
+    }));
+
+    const popupContainer = document.querySelectorAll(".popup-container");
+    popupContainer.forEach(container => container.addEventListener("click", (event)=>{
+        const popupOverlay = event.target.closest(".popup-background");
+        if (event.target === container) {
+            popupOverlay.classList.remove("show-popup");
+        }
+    }));
 };
 
 eventApp.init();

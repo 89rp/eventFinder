@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Finder</title>
 
+    <script src="https://kit.fontawesome.com/b9d5b00e65.js" crossorigin="anonymous"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Graduate&family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet"> 
@@ -77,9 +79,22 @@
                             <p>Time: 4:00pm</p>
                             <p>Price Range: $25 - $100</p>
                             <p>Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa repellendus ut tempore vitae sed dignissimos recusandae quas perspiciatis eveniet impedit!</p>
-                            <button class="button">Add to Saved Items</button>
+                            <button class="seatMap">Show Seatmap</button>
                         </div><!--eventInfo end-->
-                    <!-- </li> -->
+
+                        <div class="popup-background">
+                            <div class="popup-container">
+                                <div class="popup wrapper">
+                                    <div class="button-container">
+                                        <button id="close-popup-button"><i class="fa-solid fa-xmark"></i></button>
+                                    </div>
+                                    <div class="pop-up-img">
+                                        <img src="http://placekitten.com/200/300">
+                                    </div>
+                                </div><!--.popup .wrapper end-->
+                            </div> <!--.pop-up container end-->
+                        </div> <!--.popup-background end-->
+                    </li>
                 </ul><!--resultsContainer end-->
                 <div class="seatMap">
 
