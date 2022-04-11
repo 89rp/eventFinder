@@ -24,7 +24,6 @@ eventApp.getEvents = function(city,category,startDate,endDate){
 
     fetch(url).then(response=>response.json())
     .then(jsonResponse => {
-        console.log(jsonResponse["_embedded"]["events"]);
         eventApp.displayEvents(jsonResponse["_embedded"]["events"]);
     })
     .catch(()=>{
@@ -206,7 +205,6 @@ eventApp.seatMapEventListener = function(){
     //if show seat map button pushed, then display popup on screen
     seatMapButtons.forEach(button => button.addEventListener("click", (event) => {
         const popupOverlay = event.target.parentNode.parentNode.nextElementSibling;
-        console.log(popupOverlay);
         popupOverlay.classList.add("showPopup");
     }));
 
