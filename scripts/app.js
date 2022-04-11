@@ -183,7 +183,7 @@ eventApp.getUserInput = function(){
         let selectedCategory = document.querySelector(
         "select[name=categoryName]").value;
         const startDate = document.querySelector("input[name=startDate]").value + "T06:00:00Z";
-        let endDate =document.querySelector("input[name=endDate]").value + "T23:00:00Z";
+        let endDate =document.querySelector("input[name=endDate]").value + "T23:59:00Z";
         
         if (selectedCategory === "All") {
             selectedCategory = ""
@@ -192,7 +192,7 @@ eventApp.getUserInput = function(){
         //if user selects invalid end date, change end date to start date (will only search for events on selected start date)
         if (endDate<startDate){
             document.querySelector("input[name=endDate]").value = document.querySelector("input[name=startDate]").value;
-            endDate = document.querySelector("input[name=endDate]").value + "T23:00:00Z";
+            endDate = document.querySelector("input[name=endDate]").value + "T23:59:00Z";
         }
 
         eventApp.getEvents(selectedCity, selectedCategory,startDate,endDate);
