@@ -109,18 +109,18 @@ eventApp.createEventInfo = function(eventListing){
 eventApp.createPopUpDiv = function(popupImageSrc, popupImageAlt){
 
     const popUpDiv = document.createElement("div");
-    popUpDiv.classList.add("popup-background");
+    popUpDiv.classList.add("popupBackground");
     popUpDiv.innerHTML = `
-            <div class="popup-container">
+            <div class="popupContainer">
                 <div class="popup wrapper">
                     <div class="button-container">
-                        <button id="close-popup-button"><i class="fa-solid fa-xmark"></i></button>
+                        <button id="closePopupButton"><i class="fa-solid fa-xmark"></i></button>
                     </div>
-                    <div class="pop-up-img">
+                    <div class="popupImg">
                         <img src=${popupImageSrc} alt=${popupImageAlt}>
                     </div>
                 </div><!--.popup .wrapper end-->
-            </div> <!--.pop-up container end-->
+            </div> <!--.popupContainer end-->
     `;
     return popUpDiv;
 }
@@ -207,24 +207,24 @@ eventApp.seatMapEventListener = function(){
     seatMapButtons.forEach(button => button.addEventListener("click", (event) => {
         const popupOverlay = event.target.parentNode.parentNode.nextElementSibling;
         console.log(popupOverlay);
-        popupOverlay.classList.add("show-popup");
+        popupOverlay.classList.add("showPopup");
     }));
 
     //close pop up if
     // a) X button on pop up clicked or
     // b) user clicks outside of the pop up image
 
-    const closePopupButtons = document.querySelectorAll("#close-popup-button");
+    const closePopupButtons = document.querySelectorAll("#closePopupButton");
     closePopupButtons.forEach(button=> button.addEventListener("click", (event) => {
-        const popupOverlay = event.target.closest(".popup-background");
-        popupOverlay.classList.remove("show-popup");
+        const popupOverlay = event.target.closest(".popupBackground");
+        popupOverlay.classList.remove("showPopup");
     }));
 
-    const popupContainer = document.querySelectorAll(".popup-container");
+    const popupContainer = document.querySelectorAll(".popupContainer");
     popupContainer.forEach(container => container.addEventListener("click", (event)=>{
-        const popupOverlay = event.target.closest(".popup-background");
+        const popupOverlay = event.target.closest(".popupBackground");
         if (event.target === container) {
-            popupOverlay.classList.remove("show-popup");
+            popupOverlay.classList.remove("showPopup");
         }
     }));
 };
