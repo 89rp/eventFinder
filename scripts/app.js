@@ -51,14 +51,14 @@ eventApp.createEventInfo = function(eventListing){
         try {
             venue.innerText = `Venue: ${eventListing._embedded.venues[0].name}`;
         } catch {
-            venue.innerText = `Venue: N/A`;
+            venue.innerText = `Venue: TBD`;
         }
 
         const date = document.createElement("p");
         try {
             date.innerText = `Date: ${eventListing.dates.start.localDate}`;
         } catch {
-            date.innerText = `Date: N/A`;
+            date.innerText = `Date: TBD`;
         }
 
         //API returns military time, code block created to display time in a user friendly format
@@ -80,14 +80,14 @@ eventApp.createEventInfo = function(eventListing){
 
             time.innerText = `Time: ${timeHours}:${timeMinutes} ${timeOfDay}`;
         } catch {
-            time.innerText = `Time: Unknown`;
+            time.innerText = `Time: TBD`;
         }
 
         const price = document.createElement("p");
         try{
             price.innerText = `Price Range: $${Math.round(eventListing.priceRanges[0].min)} - $${Math.round(eventListing.priceRanges[0].max)}`; //rounded pricing to nearest dollar
         } catch{
-            price.innerText=`Price: N/A`;
+            price.innerText=`Price: TBD`;
         }
 
         const description = document.createElement("p");
