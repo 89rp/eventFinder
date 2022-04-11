@@ -26,6 +26,9 @@ eventApp.getEvents = function(city,category,startDate,endDate){
     .then(jsonResponse => {
         console.log(jsonResponse["_embedded"]["events"]);
         eventApp.displayEvents(jsonResponse["_embedded"]["events"]);
+    })
+    .catch(()=>{
+        alert("Sorry, no events found :(");
     });
 }
 
